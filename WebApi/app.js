@@ -1,4 +1,4 @@
-var express = require('express');  
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var Tasks = require('./routes/Tasks');
+var Messages = require('./routes/Messages');
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -4,6 +4,6 @@ var connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'mysql'
+    database: 'letterapp'
 });
 module.exports = connection;

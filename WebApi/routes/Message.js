@@ -1,10 +1,10 @@
 
 var express = require('express');
 var router = express.Router();
-var Task = require('../models/Task');
+var Task = require('../models/Message');
 router.get('/:id?', function(req, res, next) {
     if (req.params.id) {
-        Task.getTaskById(req.params.id, function(err, rows) {
+        Message.getMessageById(req.params.id, function(err, rows) {
             if (err) {
                 res.json(err);
             } else {
@@ -12,7 +12,7 @@ router.get('/:id?', function(req, res, next) {
             }
         });
     } else {
-        Task.getAllTasks(function(err, rows) {
+        Message.getAllMessages(function(err, rows) {
             if (err) {
                 res.json(err);
             } else {
@@ -22,7 +22,7 @@ router.get('/:id?', function(req, res, next) {
     }
 });
 router.post('/', function(req, res, next) {
-    Task.addTask(req.body, function(err, count) {
+    Message.addMessage(req.body, function(err, count) {
         if (err) {
             res.json(err);
         } else {
@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
     });
 });
 router.delete('/:id', function(req, res, next) {
-    Task.deleteTask(req.params.id, function(err, count) {
+    Message.deleteMessage(req.params.id, function(err, count) {
         if (err) {
             res.json(err);
         } else {
@@ -40,7 +40,7 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 router.put('/:id', function(req, res, next) {
-    Task.updateTask(req.params.id, req.body, function(err, rows) {
+    Message.updateMessage(req.params.id, req.body, function(err, rows) {
         if (err) {
             res.json(err);
         } else {
