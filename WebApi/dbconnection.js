@@ -1,4 +1,4 @@
-[code language = "javascript"]
+
 var mysql = require('mysql');
 var connection = mysql.createPool({
     host: 'localhost',
@@ -7,4 +7,3 @@ var connection = mysql.createPool({
     database: 'mysql'
 });
 module.exports = connection;
-[/code]
