@@ -1,7 +1,7 @@
 
 var express = require('express');
 var router = express.Router();
-var Task = require('../models/Message');
+var Message = require('../models/Message');
 router.get('/:id?', function(req, res, next) {
     if (req.params.id) {
         Message.getMessageById(req.params.id, function(err, rows) {
