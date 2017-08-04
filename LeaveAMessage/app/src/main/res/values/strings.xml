@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LeaveAMessage</string>
+    <string name="action_settings">Settings</string>
+    <string name="title">Leave a Message</string>
+    <string name="LeaveAMessage">Leave A Message Here</string>
+    <string name="ReadNearbyNotes">Read Near By Notes</string>
+    <string name="ReadAllPrevious">Read All Previous Messages</string>
+</resources>
