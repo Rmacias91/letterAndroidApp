@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
         mButNearBy = (Button) findViewById(R.id.NearBy_But);
         mButNearBy.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent i = new Intent(MainActivity.this,NearByList.class);
-            startActivity(i);
-        }
-    });
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, NearByList.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -53,4 +53,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
