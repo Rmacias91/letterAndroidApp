@@ -4,7 +4,6 @@
 
 ## 1 Design Considerations
 ### 1.1 Assumptions
-Users Will need a way to Identify they own a message. Most likley will be accomplished by having unique IDs. Users can Register with email or FB/Googe. Once they do, they have the option of deleting and editing existing messages in the database. Seeing how many views it obtained or comments each message received.
 
 ### 1.2 Constraints
 
