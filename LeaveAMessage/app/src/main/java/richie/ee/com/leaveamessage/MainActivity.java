@@ -11,9 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import richie.ee.com.leaveamessage.WebUtility.WebUtility;
+
 public class MainActivity extends AppCompatActivity {
 
     Button mButNearBy;
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        updateMessages();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,4 +62,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateMessages(){
+        WebUtility webUtilityTask = new WebUtility();
+        webUtilityTask.execute();
+    }
 }
