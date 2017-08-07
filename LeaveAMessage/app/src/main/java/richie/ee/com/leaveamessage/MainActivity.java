@@ -2,8 +2,6 @@ package richie.ee.com.leaveamessage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,11 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import richie.ee.com.leaveamessage.WebUtility.WebUtility;
+import java.util.ArrayList;
+import java.util.List;
+
+import richie.ee.com.leaveamessage.WebUtility.getAllMessagesTask;
 
 public class MainActivity extends AppCompatActivity {
 
     Button mButNearBy;
+    Button mButLeaveMsg;
+    List<Message> mMessages;
 
     @Override
     public void onStart(){
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mMessages = new ArrayList<>();
         mButNearBy = (Button) findViewById(R.id.NearBy_But);
         mButNearBy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        mButLeaveMsg = (Button) findViewById(R.id.LeaveMsg_But);
+        mButLeaveMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,);
+            }
+        });
+
+
     }
 
     @Override
@@ -63,7 +76,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMessages(){
-        WebUtility webUtilityTask = new WebUtility();
-        webUtilityTask.execute();
+        getAllMessagesTask getAllMessagesTaskTask = new getAllMessagesTask();
+        getAllMessagesTaskTask.execute();
+        List<Message>updatedMessages = getAllMessagesTaskTask.getMessages();
+        if(updatedMessages!= null) {
+            mMessages.clear();
+            mMessages.addAll(updatedMessages);
+        }
+
+        //mAdapter.notifyDataSetChanged(); NEED TO RUN FOR ADAPTER WHEN IN USE(MAYBE IN NEARBYLIST CLASS)
     }
 }

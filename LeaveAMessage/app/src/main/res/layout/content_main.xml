@@ -24,6 +24,7 @@
         app:layout_constraintHorizontal_bias="0.505"/>
 
     <Button
+        android:id="@+id/LeaveMsg_But"
         android:text="@string/LeaveAMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
         android:layout_marginTop="66dp"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintHorizontal_bias="1.0"
-        android:id="@+id/button"/>
+        />
     <Button
         android:id="@+id/NearBy_But"
         android:text="@string/ReadNearbyNotes"

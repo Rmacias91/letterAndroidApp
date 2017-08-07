@@ -6,24 +6,31 @@ package richie.ee.com.leaveamessage;
 
 public class Message {
 
+
+
+    private int id;
     private String message;
     private double lat;
-
-
     private double lon;
     //Add time later
+
+
 
     public Message(){
         message="";
         lat=0;
         lon=0;
     }
-    public Message(String message, double lat, double lon){
+    public Message(int id, double lat, double lon,String message){
+        this.id=id;
         this.message=message;
         this.lat=lat;
         this.lon=lon;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getMessage() {
         return message;
     }
