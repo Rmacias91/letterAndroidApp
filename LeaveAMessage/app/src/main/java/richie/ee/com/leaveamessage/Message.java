@@ -21,6 +21,12 @@ public class Message {
         lat=0;
         lon=0;
     }
+    public Message(double lat, double lon,String message){
+        this.message=message;
+        this.lat=lat;
+        this.lon=lon;
+    }
+
     public Message(int id, double lat, double lon,String message){
         this.id=id;
         this.message=message;
