@@ -22,6 +22,9 @@
         <activity
             android:name=".NearByList">
         </activity>
+        <activity
+            android:name=".LeaveMsgActivity">
+        </activity>
 
 
     </application>

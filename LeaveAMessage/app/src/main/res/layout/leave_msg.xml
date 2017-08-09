@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/lightBlue">
+
+    <TextView
+        android:text="@string/leaveAMessageTitle"
+        android:textSize="32sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight=".5"/>
+    <EditText
+        android:id="@+id/edit_Message"
+        android:textSize="32sp"
+        android:hint="@string/writeText"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:background="@color/lightGray"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_weight="2"/>
+    <Button
+        android:id="@+id/but_submit"
+        android:text="@string/Submit"
+        android:textSize="24sp"
+        android:background="@drawable/mybutton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight=".5"/>
+    <Button
+        android:id="@+id/but_cancel"
+        android:text="@string/cancel"
+        android:textSize="24sp"
+        android:background="@drawable/mybutton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_weight=".5"/>
+
+</LinearLayout>

@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         mButLeaveMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,);
+                Intent i = new Intent(MainActivity.this,LeaveMsgActivity.class);
+                startActivity(i);
             }
         });
 
