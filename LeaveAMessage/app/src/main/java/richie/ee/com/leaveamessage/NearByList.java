@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class NearByList extends AppCompatActivity {
-
+private List<Message> mMessages;
 
 
     @Override
@@ -22,22 +25,27 @@ public class NearByList extends AppCompatActivity {
         LinearLayoutManager mLayoutManager;
         RecyclerAdapter mRecyclerAdapter;
 
+        mMessages = new ArrayList<>();
+        if(getIntent().hasExtra("nearByList")) {
+            Bundle bundle = getIntent().getExtras();
+            mMessages = bundle.getParcelableArrayList("nearByList");
+        }
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        String [] myTestData = new String[]{"Hello","There","Guys","Hope"," THIS WORKS!"};
-        mRecyclerAdapter = new RecyclerAdapter(myTestData);
+        mRecyclerAdapter = new RecyclerAdapter(mMessages);
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 
+//Can I make this Private?
+    class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-
-        private String[] mDataset;
+        private List<Message> mDataset;
 
         //Constructor
-        public RecyclerAdapter(String[] myDataSet){
+        RecyclerAdapter(List<Message> myDataSet){
             mDataset = myDataSet;
         }
 
@@ -68,14 +76,15 @@ public class NearByList extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.mTextView.setText(mDataset[position]);
+            String messageString = mDataset.get(position).getMessage();
+            holder.mTextView.setText(messageString);
 
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return mDataset.length;
+            return mDataset.size();
         }
 
 

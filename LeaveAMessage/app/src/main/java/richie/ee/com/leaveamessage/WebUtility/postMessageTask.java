@@ -32,7 +32,7 @@ public class postMessageTask extends AsyncTask<Message, Void, Void> {
         String letter = postMessage.getMessage();
 
         try {
-            URL url = new URL("http://192.168.1.8:3000");
+            URL url = new URL("http://172.31.99.97:3000/");
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -53,7 +53,7 @@ public class postMessageTask extends AsyncTask<Message, Void, Void> {
             writer.flush();
             writer.close();
             os.close();
-
+            //TODO Handle Exception error when we Can't connect to DB
             conn.connect();
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error with Connecting", e);

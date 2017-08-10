@@ -41,7 +41,7 @@ public class getAllMessagesTask extends AsyncTask<String,Void,List<Message>>{
 
         try{
             final String MESSAGES_BASE_URL=
-                    "http://192.168.1.8:3000/Message";
+                    "http://172.31.99.97:3000/Message";
             //Build the Universal Resource Identifier
             Uri builtUri = Uri.parse(MESSAGES_BASE_URL).buildUpon().build();
 

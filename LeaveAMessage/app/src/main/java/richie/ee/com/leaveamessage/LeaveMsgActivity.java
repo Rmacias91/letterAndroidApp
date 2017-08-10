@@ -40,6 +40,7 @@ public class LeaveMsgActivity extends AppCompatActivity {
                     double lat = 24;//GPS Location will replace this is a test.
                     double lon = 19;
                     Message message = new Message(lat,lon,messageString);
+                    postMessage(message);
                 }
             }
         });

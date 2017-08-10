@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button mButNearBy;
     Button mButLeaveMsg;
-    List<Message> mMessages;
+    ArrayList<Message> mMessages;//Keep as a List?
 
     @Override
     public void onStart(){
@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, NearByList.class);
+                Bundle bundle = new Bundle();
+                if(mMessages != null) {
+                    bundle.putParcelableArrayList("nearByList",mMessages);//Should I cast as an Array List
+                    i.putExtras(bundle);
+                }
                 startActivity(i);
             }
         });

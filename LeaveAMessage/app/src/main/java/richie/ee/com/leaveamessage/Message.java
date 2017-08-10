@@ -1,10 +1,13 @@
 package richie.ee.com.leaveamessage;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by richie on 8/6/17.
  */
 
-public class Message {
+public class Message implements Parcelable{
 
 
 
@@ -33,6 +36,32 @@ public class Message {
         this.lat=lat;
         this.lon=lon;
     }
+    public Message(Parcel in){
+        this.message= in.readString();
+        this.lat= in.readDouble();
+        this.lon = in.readDouble();
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeString(message);
+        dest.writeDouble(lat);
+        dest.writeDouble(lon);
+    }
+
+    public static final Parcelable.Creator<Message> CREATOR = new Parcelable.Creator<Message>(){
+        public Message createFromParcel(Parcel in)
+        {
+            return new Message(in);
+        }
+        public Message[] newArray(int size)
+        {
+            return new Message[size];
+        }
+    };
+
 
     public int getId() {
         return id;
