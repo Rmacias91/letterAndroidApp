@@ -12,6 +12,7 @@ public class Message implements Parcelable{
 
 
     private int id;
+    private int onlineId;
     private String message;
     private double lat;
     private double lon;
@@ -63,7 +64,7 @@ public class Message implements Parcelable{
     };
 
 
-    public int getId() {
+    public double getId() {
         return id;
     }
     public String getMessage() {
@@ -89,5 +90,9 @@ public class Message implements Parcelable{
     public void setLon(double lon) {
         this.lon = lon;
     }
+    public double getOnlineId(){return onlineId;}
 
+    public void setOnlineId(int onlineId) {
+        this.onlineId = onlineId;
+    }
 }

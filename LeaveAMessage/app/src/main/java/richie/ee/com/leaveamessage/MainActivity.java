@@ -12,6 +12,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+import richie.ee.com.leaveamessage.Database.ReadMessagesTask;
 import richie.ee.com.leaveamessage.WebUtility.getAllMessagesTask;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,6 +83,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMessages(){
+        //Pull from Local DB
+        ReadMessagesTask readMessagesTaskLocalDb = new ReadMessagesTask(this);
+        readMessagesTaskLocalDb.execute();
+        List<Message> localMessages = readMessagesTaskLocalDb.getMessages();
+        if(localMessages!=null){
+            mMessages.clear();
+            mMessages.addAll(localMessages);
+        }
+
+        //PULL FROM ONLINE DB
+        /*
         getAllMessagesTask getAllMessagesTaskTask = new getAllMessagesTask();
         getAllMessagesTaskTask.execute();
         List<Message>updatedMessages = getAllMessagesTaskTask.getMessages();
@@ -89,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             mMessages.clear();
             mMessages.addAll(updatedMessages);
         }
+        */
 
         //mAdapter.notifyDataSetChanged(); NEED TO RUN FOR ADAPTER WHEN IN USE(MAYBE IN NEARBYLIST CLASS)
     }

@@ -55,6 +55,9 @@ public class postMessageTask extends AsyncTask<Message, Void, Void> {
             os.close();
             //TODO Handle Exception error when we Can't connect to DB
             conn.connect();
+            //TODO.I NEED TO RETURN THE ID OF THIS POST IN API? OR CALL GET?
+            //Use this for the Response of the Post id
+            //https://stackoverflow.com/questions/2323617/android-httppost-how-to-get-the-result
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error with Connecting", e);
         }

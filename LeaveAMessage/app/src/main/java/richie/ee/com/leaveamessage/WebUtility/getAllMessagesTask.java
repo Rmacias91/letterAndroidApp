@@ -114,7 +114,7 @@ public class getAllMessagesTask extends AsyncTask<String,Void,List<Message>>{
         JSONArray array = new JSONArray(messageJsonString);
         for(int i =0; i<array.length();i++){
             JSONObject jObj = array.getJSONObject(i);
-            int id = jObj.getInt("Id");
+            Long id = jObj.getLong("Id");
             double lat = jObj.getDouble("Lat");
             double lon = jObj.getDouble("Lon");
             String message= jObj.getString("Letter");

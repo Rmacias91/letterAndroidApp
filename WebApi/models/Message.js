@@ -9,7 +9,8 @@ var Message = {
     },
     addMessage: function(Message, callback) {
         return db.query("INSERT INTO MESSAGES (Id,Lat,Lon,Letter) VALUES (?,?,?,?)", [Message.Id,Message.Lat, Message.Lon, Message.Letter], callback);
-    },
+    },//https://stackoverflow.com/questions/38186555/node-js-mysql-how-to-get-the-last-inserted-id
+    //TODO Use this, return callback.insertId to Return the id of the generated Post.
     deleteMessage: function(id, callback) {
         return db.query("delete from messages where Id=?", [id], callback);
     },

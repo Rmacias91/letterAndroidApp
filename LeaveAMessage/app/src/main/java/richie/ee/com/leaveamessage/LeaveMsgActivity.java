@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import richie.ee.com.leaveamessage.Database.SaveMessagesTask;
 import richie.ee.com.leaveamessage.WebUtility.postMessageTask;
 
 /**
@@ -49,7 +50,11 @@ public class LeaveMsgActivity extends AppCompatActivity {
 
     private void postMessage(Message message){
         Message[]messageParams = {message};
-        postMessageTask postTask = new postMessageTask();
-        postTask.execute(messageParams);
+       //HOLD OFF ON POSTING TO DB ONLINE
+        // postMessageTask postTask = new postMessageTask();
+       // postTask.execute(messageParams);
+        //POST TO LOCAL DB
+        SaveMessagesTask saveMessagesTaskLocaldb = new SaveMessagesTask(this);
+        saveMessagesTaskLocaldb.execute();
     }
 }
