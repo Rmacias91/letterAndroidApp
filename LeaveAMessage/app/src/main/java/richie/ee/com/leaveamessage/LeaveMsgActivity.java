@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import richie.ee.com.leaveamessage.Database.SaveMessagesTask;
 import richie.ee.com.leaveamessage.WebUtility.postMessageTask;
@@ -55,6 +56,6 @@ public class LeaveMsgActivity extends AppCompatActivity {
        // postTask.execute(messageParams);
         //POST TO LOCAL DB
         SaveMessagesTask saveMessagesTaskLocaldb = new SaveMessagesTask(this);
-        saveMessagesTaskLocaldb.execute();
+        saveMessagesTaskLocaldb.execute(messageParams);
     }
 }

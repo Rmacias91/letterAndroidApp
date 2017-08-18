@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import richie.ee.com.leaveamessage.WebUtility.getAllMessagesTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
     Button mButNearBy;
     Button mButLeaveMsg;
     ArrayList<Message> mMessages;//Keep as a List?
@@ -84,13 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateMessages(){
         //Pull from Local DB
-        ReadMessagesTask readMessagesTaskLocalDb = new ReadMessagesTask(this);
+        ReadMessagesTask readMessagesTaskLocalDb = new ReadMessagesTask(this,this);
         readMessagesTaskLocalDb.execute();
-        List<Message> localMessages = readMessagesTaskLocalDb.getMessages();
-        if(localMessages!=null){
-            mMessages.clear();
-            mMessages.addAll(localMessages);
-        }
 
         //PULL FROM ONLINE DB
         /*
@@ -104,5 +101,16 @@ public class MainActivity extends AppCompatActivity {
         */
 
         //mAdapter.notifyDataSetChanged(); NEED TO RUN FOR ADAPTER WHEN IN USE(MAYBE IN NEARBYLIST CLASS)
+    }
+    public void setList(List<Message> localDbMessages){
+        if(localDbMessages!=null) {
+            mMessages.clear();
+            mMessages.addAll(localDbMessages);
+            Log.d(LOG_TAG,"MESSAGES STORED IN LOCAL DB");
+            Log.d(LOG_TAG, "Size is: "+ mMessages.size());
+            for(Message message: mMessages){
+                Log.d(LOG_TAG,message.getMessage());
+            }
+        }
     }
 }

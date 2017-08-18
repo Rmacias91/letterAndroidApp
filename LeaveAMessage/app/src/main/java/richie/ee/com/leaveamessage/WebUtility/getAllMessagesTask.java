@@ -84,7 +84,7 @@ public class getAllMessagesTask extends AsyncTask<String,Void,List<Message>>{
             }
         }
        try{
-        return getMovieListFromJSON(messagesJsonString);
+        return getMessageListFromJSON(messagesJsonString);
         }catch (JSONException e){
             Log.e(LOG_TAG,e.getMessage(),e);
             e.printStackTrace();
@@ -108,13 +108,13 @@ public class getAllMessagesTask extends AsyncTask<String,Void,List<Message>>{
 
     }
 
-    private List<Message> getMovieListFromJSON(String messageJsonString)
+    private List<Message> getMessageListFromJSON(String messageJsonString)
             throws JSONException{
         List<Message> messages = new ArrayList<>();
         JSONArray array = new JSONArray(messageJsonString);
         for(int i =0; i<array.length();i++){
             JSONObject jObj = array.getJSONObject(i);
-            Long id = jObj.getLong("Id");
+            int id = jObj.getInt("Id");
             double lat = jObj.getDouble("Lat");
             double lon = jObj.getDouble("Lon");
             String message= jObj.getString("Letter");

@@ -4,11 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import richie.ee.com.leaveamessage.Database.MessageContract.MessageTable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import richie.ee.com.leaveamessage.MainActivity;
 import richie.ee.com.leaveamessage.Message;
 
 /**
@@ -16,14 +19,13 @@ import richie.ee.com.leaveamessage.Message;
  */
 
 public class ReadMessagesTask extends AsyncTask<Void,Void,List<Message>> {
+    private static final String LOG_TAG = "ReadMessageTask";
 
     private Context mContext;
-    private List<Message> mMessages;
-    public ReadMessagesTask (Context context){
+    private MainActivity mMainActivity;
+    public ReadMessagesTask (Context context, MainActivity activity){
         mContext = context;
-    }
-    public List<Message>getMessages(){
-        return mMessages;
+        this.mMainActivity = activity;
     }
 
     @Override
@@ -33,15 +35,7 @@ public class ReadMessagesTask extends AsyncTask<Void,Void,List<Message>> {
         MessageDbHelper dbHelper = new MessageDbHelper(mContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor = db.query(
-                MessageTable.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+        Cursor  cursor = db.rawQuery("select * from "+MessageTable.TABLE_NAME,null);
 
 
         while(cursor.moveToNext()){
@@ -60,11 +54,6 @@ public class ReadMessagesTask extends AsyncTask<Void,Void,List<Message>> {
     @Override
     protected void onPostExecute(List<Message> messages) {
         super.onPostExecute(messages);
-        if(messages!=null) {
-            mMessages.clear();
-            mMessages.addAll(messages);
-        }
-
-
+        mMainActivity.setList(messages);
     }
 }

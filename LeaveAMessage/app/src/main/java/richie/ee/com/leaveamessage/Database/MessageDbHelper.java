@@ -12,7 +12,7 @@ import richie.ee.com.leaveamessage.Database.MessageContract.MessageTable;
 
 public class MessageDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=4;
     private static final String DATABASE_NAME = "letterapp.db";
 
     public MessageDbHelper(Context context){
@@ -35,8 +35,8 @@ public class MessageDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + MessageTable.TABLE_NAME + " (" +
                     MessageTable._ID + " INTEGER PRIMARY KEY," +
                     MessageTable.COLUMN_NAME_ONLINE_ID + " INTEGER," +
-                    MessageTable.COLUMN_NAME_LAT + " INTEGER," +
-                    MessageTable.COLUMN_NAME_LON + " INTEGER," +
+                    MessageTable.COLUMN_NAME_LAT + " REAL," +
+                    MessageTable.COLUMN_NAME_LON + " REAL," +
                     MessageTable.COLUMN_NAME_LETTER+ " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
