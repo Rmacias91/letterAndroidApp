@@ -1,12 +1,16 @@
 package richie.ee.com.leaveamessage;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,6 +29,7 @@ import richie.ee.com.leaveamessage.WebUtility.postMessageTask;
 
 public class LeaveMsgActivity extends AppCompatActivity {
     private static final String LOG_TAG =LeaveMsgActivity.class.getSimpleName();
+    private static final int MY_REQUEST_LOCATION = 99;
     private EditText mEditMessage;
     private Button mButSubmit;
     private Button mButCancel;
@@ -52,35 +57,48 @@ public class LeaveMsgActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!TextUtils.isEmpty(mEditMessage.getText())) {
                     String messageString = mEditMessage.getText().toString();
-                    lat = 0;//GPS Location will replace this is a test.
-                    lon = 0;
                     Message message = new Message(lat,lon,messageString);
                     postMessage(message);
                 }
             }
         });
 
-        //GPS---**
-        LocationManager mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        //GPS---**TODO Move to A separate Class as a Utility
 
-        LocationListener mLocationListener = new LocationListener(){
+        if ( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions( this, new String[] {  Manifest.permission.ACCESS_FINE_LOCATION},MY_REQUEST_LOCATION);
+        }
+
+        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        mLocationListener = new LocationListener(){
             public void onLocationChanged(Location location){
                 lat = location.getLatitude();
                 lon = location.getLongitude();
-                Log.d(LOG_TAG,"Lat is: "+ lat);
-                Log.d(LOG_TAG,"Lon is: "+ lon);
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {}
 
-            public void onProviderEnabled(String provider) {}
+            public void onProviderEnabled(String provider) {
+                Toast.makeText(LeaveMsgActivity.this, "Gps is turned on!! ",
+                        Toast.LENGTH_SHORT).show();
+            }
 
-            public void onProviderDisabled(String provider) {}
+            public void onProviderDisabled(String provider) {
+
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+                Toast.makeText(LeaveMsgActivity.this, "Gps is turned off!! ",
+                        Toast.LENGTH_SHORT).show();
+            }
         };
 
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
-        }
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, mLocationListener);
+        Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        lat = location.getLatitude();//Get Current GPS Location
+        lon = location.getLongitude();
+
+
 
     }
 
@@ -96,8 +114,8 @@ public class LeaveMsgActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         mLocationManager.removeUpdates(mLocationListener);
     }
 }

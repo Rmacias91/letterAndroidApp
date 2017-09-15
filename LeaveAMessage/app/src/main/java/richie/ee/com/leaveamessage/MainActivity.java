@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },23);
         }
+        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+
+            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },24);
+        }
 
 
     }
@@ -119,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Size is: "+ mMessages.size());
             for(Message message: mMessages){
                 Log.d(LOG_TAG,message.getMessage());
+                Log.d(LOG_TAG,String.valueOf(message.getLat()));
+                Log.d(LOG_TAG,String.valueOf(message.getLon()));
             }
         }
     }
